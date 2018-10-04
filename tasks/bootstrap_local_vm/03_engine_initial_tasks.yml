@@ -28,6 +28,9 @@
       line: "{{ item }}"
     with_items:
       - "OVESETUP_CONFIG/adminPassword=str:{{ he_admin_password }}"
+  - name: Restore a backup
+    include_tasks: restore_backup.yml
+    when: he_restore_from_file is defined and he_restore_from_file
   - name: Include before engine-setup custom tasks files for the engine VM
     include_tasks: "{{ item }}"
     with_fileglob: "hooks/enginevm_before_engine_setup/*.yml"

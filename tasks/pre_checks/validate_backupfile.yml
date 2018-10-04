@@ -1,0 +1,10 @@
+---
+- name: Ansible check file exists example.
+  stat:
+    path: "{{ he_backup_from_file }}"
+  register: file_details
+  when: he_backup_from_file is defined and he_backup_from_file
+
+- fail:
+    msg: "{{ he_backup_from_file }} does not exists"
+  when: he_backup_from_file is defined and he_backup_from_file and not file_details.stat.exists
